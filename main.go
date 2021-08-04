@@ -80,9 +80,11 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if strings.HasPrefix(m.Content,"!flirt") {
 		if contains(member.Roles, flirt) {
 			fmt.Println(s.GuildMemberRoleAdd(guildid, userid, noflirt));
+			fmt.Println(s.GuildMemberRoleRemove(guildid, userid, flirt));
 			s.ChannelMessageSend(m.ChannelID, "Changed your role so people **won't** flirt with you~")
 		} else {
 			fmt.Println(s.GuildMemberRoleAdd(guildid, userid, flirt));
+			fmt.Println(s.GuildMemberRoleRemove(guildid, userid, noflirt));
 			s.ChannelMessageSend(m.ChannelID, "Changed your role so people **will** flirt with you~")
 		}
 	}
